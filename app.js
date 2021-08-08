@@ -1,20 +1,7 @@
+const fs = require('fs');
 const profileDataArgs = process.argv.slice(2, process.argv.length);
 const [name, github] = profileDataArgs;
-// console.log(profileDataArgs);
 
-// const printProfileData = (profileDataArr) => {
-//     // this
-//     for(let i = 0; i < profileDataArgs.length; i++){
-//         console.log(profileDataArr[i]);
-//     }
-//     console.log('================');
-
-//     // Is the same as this
-//     profileDataArr.forEach(profileItem => console.log(profileItem));
-// };
-// printProfileData(profileDataArgs);
-
-// // console.log(process);
 
 const generatePage = (userName, github) => {
     return `
@@ -35,5 +22,8 @@ const generatePage = (userName, github) => {
     </html>
     `;
 };
-console.log(name, github);
-console.log(generatePage(name, github));
+fs.writeFile('index.html', generatePage(name, github), err => {
+    if (err) throw err;
+
+    console.log('Portfolio complete! Checkout out index.html to see the output');
+});
